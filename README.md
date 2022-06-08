@@ -1,2 +1,2 @@
-# ruby_exercises
-My solutions for "The Odin Project" ruby exercises
+# Ruby Exercises
+These are my solutions for "The Odin Project" ruby exercises.
