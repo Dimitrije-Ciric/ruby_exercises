@@ -8,7 +8,7 @@ def substrings(text, dictionary)
     sub_words = {}
     dictionary.each do |word|
         next unless lowercase_text.include?(word)
-        next if sub_words[word] # if same word occured before => skip
+        next if sub_words[word] # if same word occurred before => skip
         lowercase_word = word.downcase
         start = 0
         sub_words[lowercase_word] = 0
