@@ -4,18 +4,18 @@ require "./substrings.rb"
 def run_testing()
     print "Testing started!\n"
 
-    dictionary = ["below", "down", "go", "going", "horn", "how", "howdy", "it", "i", "low", "own", "part", "partner", "sit"]
+    dictionary = ["below", "down", "go", "going", "horn", "how", "howdy", "it", "i", "low", "own", "part", "partner", "sit", "How", "hOw"]
     
     tests = { # key - value => text - solution
         "below" => { 
             "below" => 1, 
             "low" => 1 
         },
-        "Howdy partner, sit down! How's it going?" => { 
+        "Howdy partner, sit down! HOw's it going? how How" => { 
             "down" => 1, 
             "go" => 1, 
             "going" => 1, 
-            "how" => 2, 
+            "how" => 4, 
             "howdy" => 1, 
             "it" => 2, 
             "i" => 3, 
@@ -24,7 +24,7 @@ def run_testing()
             "partner" => 1, 
             "sit" => 1 
         },
-        [1, 2, 3] => [] # text value is invalid type, so it returns empty array([])
+        [1, 2, 3] => [], # text value is invalid type, so it returns empty array([])
     }
 
     test_idx = 1
