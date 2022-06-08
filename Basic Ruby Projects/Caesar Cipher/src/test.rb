@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 require "./caesar_cipher.rb"
 
 def run_testing()
