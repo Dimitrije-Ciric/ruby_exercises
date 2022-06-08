@@ -2,10 +2,8 @@
 require "./caesar_cipher.rb"
 
 def run_testing()
-    caesar_cipher("What a string!", 5)
-    print "\n"
-    caesar_cipher("Testing started!", 130)
-    print "\n"
+    print caesar_cipher("What a string!", 5), "\n"
+    print caesar_cipher("Testing started!", 130), "\n"
 
     text = "Lorem ipsum dolor sit amet.[12]"
 
@@ -13,7 +11,8 @@ def run_testing()
         26 => "Lorem ipsum dolor sit amet.[12]",
         53 => "Mpsfn jqtvn epmps tju bnfu.[12]",
         -53 => "Knqdl hortl cnknq rhs zlds.[12]",
-        -123 => "Svylt pwzbt kvsvy zpa htla.[12]"
+        -123 => "Svylt pwzbt kvsvy zpa htla.[12]",
+        [1, 2, 3] => "Lorem ipsum dolor sit amet.[12]" # shift value is invalid type, so it returns passed text without shifting
     }
 
     test_idx = 1
@@ -22,9 +21,9 @@ def run_testing()
         print "Test #{test_idx}:\n"
         print "\tShift: #{key}\n"
 
-        print "\tcaesar_cipher() output:"
-        output = caesar_cipher(text, key)
-        print "\n\tsoultion: #{value}\n"
+        output = caesar_cipher!(text, key)
+        print "\tcaesar_cipher() output: #{output}\n"
+        print "\tsolution: #{value}\n"
 
         if output == value 
             print "\tTEST PASSED!\n"
