@@ -4,7 +4,7 @@ require "./bubble_sort.rb"
 def run_testing()
     print "Testing started!\n"
 
-    tests = { # key - value => array of stock_prices - solution
+    tests = { # key - value => array - sorted array
         [] => [],
         [17] => [17],
         {} => {}, # invalid input
