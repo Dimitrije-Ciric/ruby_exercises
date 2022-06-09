@@ -21,7 +21,7 @@ def run_testing()
         print "Test #{test_idx}:\n"
         print "\tShift: #{key}\n"
 
-        output = caesar_cipher!(text, key)
+        output = caesar_cipher(text, key)
         print "\tcaesar_cipher() output: #{output}\n"
         print "\tsolution: #{value}\n"
 
