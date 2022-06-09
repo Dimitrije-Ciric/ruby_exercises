@@ -1,24 +1,26 @@
 #!/usr/bin/env ruby
-require "./stock_picker.rb"
+require "./bubble_sort.rb"
 
 def run_testing()
     print "Testing started!\n"
 
     tests = { # key - value => array of stock_prices - solution
-        [] => [-1, -1], # invalid input
-        [17,3,6,9,15,8,6,1,10] => [1,4],
-        "Hello world" => [-1, -1], # invalid input
-        [3, 3, 3] => [0, 0]
+        [] => [],
+        [17] => [17],
+        {} => {}, # invalid input
+        [1, 2, 3] => [1, 2, 3],
+        [3, 2, 1] => [1, 2, 3],
+        [4, 3, 78, 2, 0, 2] => [0, 2, 2, 3, 4, 78]
     }
 
     test_idx = 1
     failed_test_cnt = 0
     tests.each do |key, value|
         print "Test #{test_idx}:\n"
-        print "\tstock prices: #{key}\n"
+        print "\tinput array: #{key}\n"
 
-        output = stock_picker(key)
-        print "\tstock_picker() output: #{output}\n"
+        output = bubble_sort(key)
+        print "\tbubble_sort() output: #{output}\n"
         print "\tsolution: #{value}\n"
 
         if output == value 
