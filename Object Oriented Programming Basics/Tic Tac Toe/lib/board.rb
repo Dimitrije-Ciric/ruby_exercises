@@ -22,7 +22,7 @@ class Board
      '└───┴───┴───┘'].reduce { |return_string, curr_string| return_string + curr_string }
   end
 
-  def place(cell_number, symbol)
+  def place?(cell_number, symbol)
     if cell_number.positive? && @board[cell_number - 1].instance_of?(Integer)
       @board[cell_number - 1] = symbol
       true
