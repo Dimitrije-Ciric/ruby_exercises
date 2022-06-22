@@ -11,28 +11,17 @@ class Player
   def initialize(id)
     puts "Player #{id}"
 
-    loop do
-      print 'Enter your name: '
-      break if set_name(gets.chomp)
-    end
-
-    loop do
-      print 'Enter your 1 character symbol: '
-      break if set_symbol(gets.chomp)
-    end
+    enter_name
+    enter_symbol
 
     @score = 0
   end
 
   private
 
-  def set_name(name)
+  def self.valid_name?(name)
     if name.length.between?(3, 20)
-      unless @@reserved_names.any?(name)
-        @name = name
-        @@reserved_names << name
-        return true
-      end
+      return true unless @@reserved_names.any?(name)
 
       puts 'Players must have different names'
     else
@@ -42,13 +31,24 @@ class Player
     false
   end
 
-  def set_symbol(symbol)
+  def name=(name)
+    @name = name
+    @@reserved_names << name
+  end
+
+  def enter_name      
+    print 'Enter your name: '; gets
+
+    if Player.valid_name?($_.chomp!)
+      self.name = $_
+    else
+      enter_name
+    end
+  end
+
+  def self.valid_symbol?(symbol)
     if symbol.length.eql?(1)
-      unless @@reserved_symbols.any?(symbol)
-        @symbol = symbol
-        @@reserved_symbols << symbol
-        return true
-      end
+      return true unless @@reserved_symbols.any?(symbol)
 
       puts 'Players must have different symbols'
     else
@@ -56,5 +56,20 @@ class Player
     end
     
     false
+  end
+
+  def symbol=(symbol)
+    @symbol = symbol
+    @@reserved_symbols << symbol
+  end
+
+  def enter_symbol
+    print 'Enter your 1 character symbol: '; gets
+
+    if Player.valid_symbol?($_.chomp!)
+      self.symbol = $_
+    else
+      enter_symbol
+    end
   end
 end
