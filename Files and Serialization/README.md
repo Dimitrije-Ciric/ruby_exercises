@@ -1,0 +1,2 @@
+# Files and Serialization
+All solutions from this folder are solutions to exercises from [Files and Serialization](https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby#files-and-serialization) section.
