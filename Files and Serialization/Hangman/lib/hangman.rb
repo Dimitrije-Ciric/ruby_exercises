@@ -30,8 +30,8 @@ module Hangman
     show_guessed_letters(guessed_letters)
     guess = guess_input
 
-    if guess.eql?('save')
-      return 'save'
+    if guess == 'save'
+      return guess
     elsif guessed_letters.include?(guess)
       puts 'You\'ve already guessed that letter!! Enter again.'
     elsif valid_guess?(guess)
@@ -58,7 +58,7 @@ module Hangman
       puts "\n#{attempts_left}. attempts left:"
       guess = enter_guess(guessed_letters)
 
-      if guess.eql?('save')
+      if guess == 'save'
         HangmanState.save(word, guessed_letters)
         return
       elsif word.include?(guess)
@@ -94,7 +94,7 @@ module Hangman
   end
 
   def self.run
-    if new_or_load.eql?(1)
+    if new_or_load == 1
       play(RandomWord.new)
     else
       game_state = HangmanState.load
