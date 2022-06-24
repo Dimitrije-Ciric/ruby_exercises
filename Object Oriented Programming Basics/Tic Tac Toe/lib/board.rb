@@ -22,9 +22,13 @@ class Board
      '└───┴───┴───┘'].reduce { |return_string, curr_string| return_string + curr_string }
   end
 
+  def reserved?(cell_number)
+    !@board[cell_number - 1].instance_of?(Integer)
+  end
+
   def place?(cell_number, symbol)
-    if cell_number.positive? && @board[cell_number - 1].instance_of?(Integer)
-      @board[cell_number - 1] = symbol
+    if cell_number.between?(1, 9) && !reserved?(cell_number)
+      @board[cell_number - 1] = symbol.to_s
       true
     else
       false

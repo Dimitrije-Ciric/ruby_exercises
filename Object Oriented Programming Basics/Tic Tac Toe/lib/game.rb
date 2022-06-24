@@ -4,7 +4,7 @@ require_relative 'player'
 require_relative 'board'
 
 # tic tac toe game class
-class Game
+module Game
   begin
     # try load Tic Tac Toe sign
     SIGN = File.read('sign.txt').freeze
@@ -12,19 +12,19 @@ class Game
     SIGN = 'Tic Tac Toe'
   end
 
-  def self.score_table(player1, player2)
+  def Game.score_table(player1, player2)
     # max name length
     max_name = [player1.name.length, player2.name.length].max
     # max score length
     max_score = [player1.score.to_s.length, player2.score.to_s.length].max
 
     puts "┌#{'─' * max_name}┬#{'─' * max_score}┐"
-    puts "│#{player1.name + ' ' * (max_name - player1.name.length)}│#{player1.score}│"
-    puts "│#{player2.name + ' ' * (max_name - player2.name.length)}│#{player2.score}│"
+    puts "│#{player1.name.ljust(max_name)}│#{player1.score.to_s.ljust(max_score)}│"
+    puts "│#{player2.name.ljust(max_name)}│#{player2.score.to_s.ljust(max_score)}│"
     puts "└#{'─' * max_name}┴#{'─' * max_score}┘"
   end
 
-  def self.end_game?(board, current_player)
+  def Game.end_game?(board, current_player)
     if board.win?
       puts '', board, "\n#{current_player.name} won!"
       current_player.score += 1
@@ -37,7 +37,7 @@ class Game
     end
   end
 
-  def self.play_turn(player, board)
+  def Game.play_turn(player, board)
     loop do
       puts
       puts board
@@ -49,7 +49,7 @@ class Game
     end
   end
 
-  def self.single_game(player_starts, player1, player2)
+  def Game.single_game(player_starts, player1, player2)
     board = Board.new
     current_player = player_starts
     loop do
@@ -63,7 +63,7 @@ class Game
     repeat_game(player_starts, player1, player2) # ask for new game
   end
 
-  def self.repeat_game(player_starts, player1, player2)
+  def Game.repeat_game(player_starts, player1, player2)
     puts score_table(player1, player2)
 
     print 'Do you want to play new game(Y/N)? '
@@ -76,9 +76,7 @@ class Game
     single_game((player_starts == player1 ? player2 : player1), player1, player2)
   end
 
-  private_class_method :score_table, :end_game?, :play_turn, :single_game, :repeat_game
-
-  def self.run
+  def Game.run
     puts SIGN, "\n" # displays Tic Tac Toe sign
 
     # create players
