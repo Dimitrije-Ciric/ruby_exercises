@@ -1,3 +1,5 @@
-require_relative 'computer'
+# frozen_string_literal: true
 
-Computer.new
+require_relative 'game'
+
+Game.menu
