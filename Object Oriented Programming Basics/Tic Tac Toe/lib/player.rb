@@ -47,7 +47,7 @@ class Player
   end
 
   def self.valid_symbol?(symbol)
-    if symbol.length.eql?(1)
+    if symbol.length == 1
       return true unless @@reserved_symbols.any?(symbol)
 
       puts 'Players must have different symbols'

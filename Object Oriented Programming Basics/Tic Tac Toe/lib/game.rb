@@ -73,7 +73,7 @@ class Game
     end
     puts "\n\nNew game began! :)"
 
-    single_game((player_starts.eql?(player1) ? player2 : player1), player1, player2)
+    single_game((player_starts == player1 ? player2 : player1), player1, player2)
   end
 
   private_class_method :score_table, :end_game?, :play_turn, :single_game, :repeat_game
