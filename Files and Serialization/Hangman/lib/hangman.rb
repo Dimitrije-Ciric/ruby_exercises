@@ -5,15 +5,15 @@ require_relative 'hangman_state'
 require 'json'
 
 module Hangman
-  def self.valid_guess?(guess)
+  def Hangman.valid_guess?(guess)
     ('a'..'z').include?(guess)
   end
 
-  def self.show_guessed_letters(guessed_letters)
+  def Hangman.show_guessed_letters(guessed_letters)
     puts "Letters guessed: #{guessed_letters.join(', ')}" if guessed_letters.length.positive?
   end
 
-  def self.correct_guess?(word, guessed_letters)
+  def Hangman.correct_guess?(word, guessed_letters)
     word.each_char do |letter|
       return false unless guessed_letters.include?(letter)
     end
@@ -21,12 +21,12 @@ module Hangman
     true
   end
 
-  def self.guess_input
+  def Hangman.guess_input
     print 'Enter your guess(or type save to save current state): '
     gets.chomp.downcase
   end
 
-  def self.enter_guess(guessed_letters)
+  def Hangman.enter_guess(guessed_letters)
     show_guessed_letters(guessed_letters)
     guess = guess_input
 
@@ -44,7 +44,7 @@ module Hangman
     enter_guess(guessed_letters)
   end
 
-  def self.attempts_left(word, guessed_letters)
+  def Hangman.attempts_left(word, guessed_letters)
     10 - guessed_letters.reduce(0) do |wrong, letter|
       wrong += 1 unless word.include?(letter)
       wrong
@@ -52,7 +52,7 @@ module Hangman
   end
 
   # too long method
-  def self.play(word, guessed_letters = [])
+  def Hangman.play(word, guessed_letters = [])
     attempts_left = attempts_left(word, guessed_letters)
     while attempts_left.positive?
       puts "\n#{attempts_left}. attempts left:"
@@ -80,7 +80,7 @@ module Hangman
   end
 
   # ask to continue old game, or start a new one
-  def self.new_or_load
+  def Hangman.new_or_load
     puts 'Select:', '1) New game', '2) Load game'
 
     user_input = gets.chomp
@@ -93,7 +93,7 @@ module Hangman
     end
   end
 
-  def self.run
+  def Hangman.run
     if new_or_load == 1
       play(RandomWord.new)
     else

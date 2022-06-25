@@ -2,74 +2,59 @@
 
 # holds player state(name, symbol, current score)
 class Player
-  attr_reader :name, :symbol
-  attr_accessor :score
+  attr_reader :name, :symbol, :score
+
+  MIN_NAME_LENGTH = 3
+  MAX_NAME_LENGTH = 20
 
   @@reserved_names = []
   @@reserved_symbols = []
 
-  def initialize(id)
-    puts "Player #{id}"
-
-    enter_name
-    enter_symbol
-
+  def initialize(name, symbol)
+    self.name = name
+    self.symbol = symbol
     @score = 0
+  end
+
+  def self.reserved_name?(name)
+    @@reserved_names.include?(name)
+  end
+
+  def self.min_name_length
+    MIN_NAME_LENGTH
+  end
+
+  def self.max_name_length
+    MAX_NAME_LENGTH
+  end
+
+  def self.valid_name?(name)
+    name.length.between?(MIN_NAME_LENGTH, MAX_NAME_LENGTH)
+  end
+
+  def self.reserved_symbol?(symbol)
+    @@reserved_symbols.include?(symbol)
+  end
+
+  def self.valid_symbol?(symbol)
+    symbol.length == 1
   end
 
   private
 
-  def self.valid_name?(name)
-    if name.length.between?(3, 20)
-      return true unless @@reserved_names.any?(name)
-
-      puts 'Players must have different names'
-    else
-      puts 'Name must have 3 to 20 characters'
-    end
-
-    false
-  end
-
   def name=(name)
     @name = name
-    @@reserved_names << name
-  end
-
-  def enter_name      
-    print 'Enter your name: '; gets
-
-    if Player.valid_name?($_.chomp!)
-      self.name = $_
-    else
-      enter_name
-    end
-  end
-
-  def self.valid_symbol?(symbol)
-    if symbol.length == 1
-      return true unless @@reserved_symbols.any?(symbol)
-
-      puts 'Players must have different symbols'
-    else
-      puts 'Symbol must have only 1 character'
-    end
-    
-    false
+    @@reserved_names |= [name]
   end
 
   def symbol=(symbol)
     @symbol = symbol
-    @@reserved_symbols << symbol
+    @@reserved_symbols |= [symbol]
   end
 
-  def enter_symbol
-    print 'Enter your 1 character symbol: '; gets
+  public
 
-    if Player.valid_symbol?($_.chomp!)
-      self.symbol = $_
-    else
-      enter_symbol
-    end
+  def increment_score
+    @score += 1
   end
 end

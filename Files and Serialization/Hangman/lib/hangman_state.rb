@@ -3,11 +3,11 @@
 module HangmanState
   SAVE_DIR = '../save/'
 
-  def invalid_letters
+  def HangmanState.invalid_letters
     puts 'Name you entered contains invalid letters. Try again.'
   end
 
-  def self.save(word, guessed_letters)
+  def HangmanState.save(word, guessed_letters)
     print 'Enter name of this game: '
     file_path = "#{SAVE_DIR}#{file_name = gets.chomp}.json"
 
@@ -30,13 +30,13 @@ module HangmanState
     save(word, guessed_letters) # try again
   end
 
-  def self.available
+  def HangmanState.available
     puts 'Available saves:'
     names = Dir.entries(SAVE_DIR).reject { |name| %(. ..).include?(name) }
     puts names.map { |name| name[0, name.length - 5] }
   end
 
-  def self.load
+  def HangmanState.load
     available
     print 'Enter name of saved game: '
     file_path = "#{SAVE_DIR}#{file_name = gets.chomp}.json"
