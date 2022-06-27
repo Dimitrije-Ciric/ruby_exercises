@@ -137,7 +137,10 @@ module Enumerable
 
     reduced = initial or first
 
-    my_each { |element| reduced = operator.call(reduced, element) }
+    my_each_with_index do |element, idx|
+      next if initial.nil? && idx.zero?
+      reduced = operator.call(reduced, element)
+    end
 
     reduced
   end
