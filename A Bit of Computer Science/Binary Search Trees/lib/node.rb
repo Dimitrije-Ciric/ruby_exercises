@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Node
-  include Comperable
+  include Comparable
 
-  attr_accessor :value, :left, :right
+  attr_accessor :value, :parent, :left, :right
 
   def initialize(value = nil, left = nil, right = nil)
     self.value = value
