@@ -10,12 +10,12 @@ class KnightNode
 
   public
 
-  @visited = []
+  @@visited = []
 
   def initialize(position, parent = nil)
     self.position = position
     self.parent = parent
-    @visited |= position
+    @@visited |= position
   end
 
   MOVES = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, 2], [1, -2], [-1, 2], [-1, -2]].freeze
@@ -27,7 +27,7 @@ class KnightNode
   def next_moves
     MOVES.map { |move| [position[0] + move[0], position[1] + move[1]] }
          .keep_if { |move| KnightNode.valid_move?(move) }
-         .reject { |move| @visited.include?(move) }
+         .reject { |move| @@visited.include?(move) }
          .map { |move| KnightNode.new(move, self) }
   end
 
