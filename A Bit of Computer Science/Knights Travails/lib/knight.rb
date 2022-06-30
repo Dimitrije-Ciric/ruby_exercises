@@ -7,15 +7,15 @@ class KnightNode
 
   attr_accessor :parent
   attr_writer :position
-  
+
   public
 
-  @@visited = []
+  @visited = []
 
   def initialize(position, parent = nil)
     self.position = position
     self.parent = parent
-    @@visited |= position
+    @visited |= position
   end
 
   MOVES = [[2, 1], [2, -1], [-2, 1], [-2, -1], [1, 2], [1, -2], [-1, 2], [-1, -2]].freeze
@@ -26,9 +26,9 @@ class KnightNode
 
   def next_moves
     MOVES.map { |move| [position[0] + move[0], position[1] + move[1]] }
-          .keep_if { |move| KnightNode.valid_move?(move) }
-          .reject { |move| @@visited.include?(move) }
-          .map { |move| KnightNode.new(move, self) }
+         .keep_if { |move| KnightNode.valid_move?(move) }
+         .reject { |move| @visited.include?(move) }
+         .map { |move| KnightNode.new(move, self) }
   end
 
   # path from this node to root
@@ -37,7 +37,7 @@ class KnightNode
 
     tmp_node = self
     until tmp_node.nil?
-      if defined? yield 
+      if defined? yield
         yield tmp_node
       else
         shortest_path.unshift(tmp_node.position)
@@ -45,7 +45,7 @@ class KnightNode
 
       tmp_node = tmp_node.parent
     end
-    
+
     shortest_path unless block_given?
   end
 end
